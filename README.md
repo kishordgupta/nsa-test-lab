@@ -25,7 +25,17 @@ scores = model.decision_function(X_test)
 labels = model.predict(X_test)  # 1 = anomaly, 0 = inlier
 ```
 
-You can also import from the top-level package:
+Contrastive one-class detectors are also available from the package:
+
+```python
+from nsa_test_lab import InfoNCEContrastiveDetector
+
+model = InfoNCEContrastiveDetector(contamination=0.1, random_state=42)
+model.fit(X_train)
+scores = model.decision_function(X_test)
+```
+
+You can also import NSA models from the top-level package:
 
 ```python
 from nsa_test_lab import BinaryNSA, RNSA, VDetector, GridNSA, MNSA
@@ -36,10 +46,11 @@ from nsa_test_lab import BinaryNSA, RNSA, VDetector, GridNSA, MNSA
 The repo includes separate public files for these NSA types:
 
 `BinaryNSA`, `RNSA`, `RRNSA`, `VDetector`, `GridNSA`, `GFRNSA`,
-`MatrixNSA`, `ANSA`, `EvoSeedRNSA`, `ORNSA`, `OptimizedNSA`, `FtNSA`,
-`IVRNSA`, `CBNSA`, `PRR2NSA`, `DENSElectionNSA`, `DENSA`, `AntigenNSA`,
-`NSADE`, `NSAPSO`, `IORNSA`, `BIORVNSA`, `HNSAIDSA`, `NSAII`, `OALFBNSA`,
-`FBNSA`, `MNSA`, `NSNAD`, `RENNSA`, `AINSA`, `ODNSA`, `CNSA`, and `VORNSA`.
+`MatrixNSA`, `ANSA`, `EvoSeedRNSA`, `ORNSA`, `OptimizedNSA`,
+`FtNSA`, `IVRNSA`, `CBNSA`, `PRR2NSA`, `DENSElectionNSA`, `DENSA`,
+`AntigenNSA`, `NSADE`, `NSAPSO`, `IORNSA`, `BIORVNSA`, `HNSAIDSA`,
+`NSAII`, `OALFBNSA`, `FBNSA`, `MNSA`, `NSNAD`, `RENNSA`, `AINSA`,
+`ODNSA`, `CNSA`, and `VORNSA`.
 
 ## Run Experiments
 
@@ -64,20 +75,52 @@ close anomalies, anisotropic clusters, moons, circles, high-dimensional sparse
 data, correlated Gaussian data, ring outliers, local-density outliers, linear
 manifold anomalies, and S-curve anomalies.
 
+## Contrastive and Baseline Comparison
+
+The extended benchmark compares the existing NSA registry with:
+
+* `ContrastiveInfoNCE`
+* `ContrastiveTriplet`
+* `GaussianInfoNCE`
+* `IsolationForest`
+* `LocalOutlierFactor`
+* `OneClassSVM`
+
+Run a fast real-data comparison:
+
+```bash
+nsa-contrastive-benchmark --dataset-source real --datasets all --models contrastive,baseline --detectors 24 --optimization-iter 1
+```
+
+Run selected NSA models against the new contrastive detectors:
+
+```bash
+PYTHONPATH=src:. python -m experiments.run_contrastive_benchmark \
+  --dataset-source synthetic \
+  --datasets two_moons,nested_circles,high_dimensional_blobs \
+  --models VDetector,DENSA,MNSA,contrastive,baseline \
+  --detectors 32 \
+  --optimization-iter 3
+```
+
+The contrastive benchmark writes:
+
+* `reports/contrastive_results.csv`
+* `reports/contrastive_results.json`
+* `reports/contrastive_benchmark_report.md`
+
+The additional built-in real-data novelty tasks are `breast_cancer_malignant`,
+`wine_class_1_vs_rest`, `digits_zero_vs_odd`, and `digits_even_vs_nine`.
+
 ## Test
 
 ```bash
 pytest
 ```
 
-##cite
+## Citation
+
 K. D. Gupta and D. Dasgupta, "Negative Selection Algorithm Research and Applications in the Last Decade: A Review," in IEEE Transactions on Artificial Intelligence, vol. 3, no. 2, pp. 110-128, April 2022, doi: 10.1109/TAI.2021.3114661.
-Abstract: The negative selection algorithm (NSA) is one of the important methods in the field of immunological computation (or artificial immune systems). Over the years, some progress was made that turns this algorithm (NSA) into an efficient approach to solve problems in different domain. This review takes into account these signs of progress during the last decade and categorizes those based on different characteristics and performances. Our study shows that NSA’s evolution can be labeled in four ways highlighting the most notable NSA variations and their limitations in different application domains. We also present alternative approaches to NSA for comparison and analysis. It is evident that NSA performs better for nonlinear representation than most of the other methods, and it can outperform neural-based models in computation time. We summarize NSA’s development and highlight challenges in NSA research in comparison with other similar models.
-keywords: {Detectors;Immune system;Artificial intelligence;Complexity theory;Anomaly detection;Hamming distance;Computational modeling;Artificial immune system (AIS);immunological computation;negative data representation;negative selection algorithm (NSA)},
-URL: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9546626&isnumber=9741091
-
-
-
 
 ## Notes
 
