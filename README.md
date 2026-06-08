@@ -70,6 +70,15 @@ manifold anomalies, and S-curve anomalies.
 pytest
 ```
 
+##cite
+K. D. Gupta and D. Dasgupta, "Negative Selection Algorithm Research and Applications in the Last Decade: A Review," in IEEE Transactions on Artificial Intelligence, vol. 3, no. 2, pp. 110-128, April 2022, doi: 10.1109/TAI.2021.3114661.
+Abstract: The negative selection algorithm (NSA) is one of the important methods in the field of immunological computation (or artificial immune systems). Over the years, some progress was made that turns this algorithm (NSA) into an efficient approach to solve problems in different domain. This review takes into account these signs of progress during the last decade and categorizes those based on different characteristics and performances. Our study shows that NSA’s evolution can be labeled in four ways highlighting the most notable NSA variations and their limitations in different application domains. We also present alternative approaches to NSA for comparison and analysis. It is evident that NSA performs better for nonlinear representation than most of the other methods, and it can outperform neural-based models in computation time. We summarize NSA’s development and highlight challenges in NSA research in comparison with other similar models.
+keywords: {Detectors;Immune system;Artificial intelligence;Complexity theory;Anomaly detection;Hamming distance;Computational modeling;Artificial immune system (AIS);immunological computation;negative data representation;negative selection algorithm (NSA)},
+URL: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9546626&isnumber=9741091
+
+
+
+
 ## Notes
 
 These implementations are engineering approximations of NSA families exposed
