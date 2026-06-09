@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nsa-test-lab"
-version = "0.1.0"
+version = "0.2.0"
 description = "Standalone Negative Selection Algorithm detectors and benchmarks."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -40,6 +40,7 @@ dev = [
 
 [project.scripts]
 nsa-benchmark = "experiments.run_benchmark:main"
+nsa-gui = "nsa_test_lab.gui:main"
 
 [project.urls]
 Homepage = "https://github.com/kishordgupta/nsa-test-lab"

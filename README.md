@@ -64,6 +64,24 @@ close anomalies, anisotropic clusters, moons, circles, high-dimensional sparse
 data, correlated Gaussian data, ring outliers, local-density outliers, linear
 manifold anomalies, and S-curve anomalies.
 
+## Launch GUI
+
+```bash
+nsa-gui
+```
+
+From an uninstalled checkout, use:
+
+```bash
+PYTHONPATH=src:. python -m nsa_test_lab.gui
+```
+
+The GUI lets users choose an NSA variant, edit detector parameters, select a
+CSV file, choose an optional label column, run scoring, and export row-level
+anomaly scores. CSV files should include a header row and numeric feature
+columns. If a label column is selected, values matching
+`1,true,yes,anomaly,outlier,attack` are treated as anomalies by default.
+
 ## Test
 
 ```bash
