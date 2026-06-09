@@ -1,0 +1,17 @@
+#!/bin/zsh
+set -e
+
+MACOS_DIR="${0:A:h}"
+APP_DIR="${MACOS_DIR:h:h}"
+REPO_DIR="${APP_DIR:h}"
+
+if [[ -x "$REPO_DIR/.venv/bin/python" ]]; then
+    PYTHON="$REPO_DIR/.venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+    PYTHON="$(command -v python3)"
+else
+    PYTHON="$(command -v python)"
+fi
+
+export PYTHONPATH="$REPO_DIR/src:$REPO_DIR"
+exec "$PYTHON" -m nsa_test_lab.gui

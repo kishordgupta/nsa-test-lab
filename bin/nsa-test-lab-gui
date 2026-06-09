@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
+REPO_DIR=$(CDPATH= cd "$SCRIPT_DIR/.." && pwd)
+
+if [ -x "$REPO_DIR/.venv/bin/python" ]; then
+    PYTHON="$REPO_DIR/.venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+    PYTHON=$(command -v python3)
+else
+    PYTHON=$(command -v python)
+fi
+
+PYTHONPATH="$REPO_DIR/src:$REPO_DIR" exec "$PYTHON" -m nsa_test_lab.gui "$@"

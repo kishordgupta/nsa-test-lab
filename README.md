@@ -70,6 +70,15 @@ manifold anomalies, and S-curve anomalies.
 nsa-gui
 ```
 
+Or run the repository launcher:
+
+```bash
+./bin/nsa-test-lab-gui
+```
+
+On macOS, double-click `NSA Test Lab.command` from Finder to open the GUI.
+You can also double-click `NSA Test Lab.app`.
+
 From an uninstalled checkout, use:
 
 ```bash
